@@ -19,9 +19,14 @@ Route::get('/', function () {
 });
 */
 
-Route::get('/'          ,    [PrincipalController::class , 'principal']);
-Route::get('/sobre-nos' ,    [SobreNosController::class  , 'principal']);
-Route::get('/contato'   ,    [ContatoController::class   , 'principal']);
+Route::get('/', [PrincipalController::class, 'principal']);
+Route::get('/sobre-nos', [SobreNosController::class , 'principal']);
+Route::get('/contato', [ContatoController::class,'principal']);
+
+Route::get('/login', function(){return "Login";});
+Route::get('/clientes', function(){return "clientes";});
+Route::get('/fornecedores', function(){return "fornecedores";});
+Route::get('/produtos', function(){return "produtos";});
 
 //Route::get($uri,$callback)
 
