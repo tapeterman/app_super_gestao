@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\{PrincipalController,SobreNosController,ContatoController};
+use App\Http\Controllers\{PrincipalController,SobreNosController,ContatoController,TesteController};
 
 /*
 |--------------------------------------------------------------------------
@@ -32,9 +32,8 @@ Route::prefix('/app')->group(function(){
     Route::get('/produtos', function(){return "produtos";})->name('app.produtos');
 });
 
-Route::get('/rota1', function(){return "rota1";})->name('app.rota1');
-Route::get('/rota2', function(){return redirect()->route('app.rota1');}
-)->name('app.rota2');
+Route::get('/teste/{p1}/{p2}', [TesteController::class,'teste'])->name('app.teste');
+
 
 Route::fallback(function(){
     echo 'A rota acessada não existe,  para ir para pagina inicial <a href="'.route('site.index').'">clique aqui</a>';
