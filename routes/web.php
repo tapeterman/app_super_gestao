@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\{PrincipalController,SobreNosController,ContatoController,TesteController};
+use App\Http\Controllers\{PrincipalController,SobreNosController,ContatoController,TesteController,FornecedorController};
 
 /*
 |--------------------------------------------------------------------------
@@ -28,7 +28,7 @@ Route::get('/login', function(){return "Login";})->name('site.login');
 //agrupamento de rotas
 Route::prefix('/app')->group(function(){
     Route::get('/clientes', function(){return "clientes";})->name('app.clientes');
-    Route::get('/fornecedores', function(){return "fornecedores";})->name('app.fornecedores');
+    Route::get('/fornecedores', [FornecedorController::class, 'index'])->name('app.fornecedores');
     Route::get('/produtos', function(){return "produtos";})->name('app.produtos');
 });
 

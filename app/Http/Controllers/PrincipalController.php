@@ -10,3 +10,4 @@ class PrincipalController extends Controller
         return view('site.principal');
     }
 }
+

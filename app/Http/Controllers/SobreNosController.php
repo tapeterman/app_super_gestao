@@ -10,3 +10,4 @@ class SobreNosController extends Controller
         return view('site.sobre-nos');
     }
 }
+
