@@ -14,6 +14,8 @@ class FornecedorSeeder extends Seeder
      */
     public function run()
     {
+
+        /* não é necessario com a factory em uso!
         //instanciando o Objeto
         $fornecedor = new Fornecedor();
         $fornecedor->nome = 'Fornecedor 3';
@@ -36,7 +38,7 @@ class FornecedorSeeder extends Seeder
             'site'  => 'www.fornecedor5.com.br',
             'uf'    => 'mg',
             'email' => 'Fornecedor5@email.com'
-        ]);
+        ]);*/
 
     }
 }

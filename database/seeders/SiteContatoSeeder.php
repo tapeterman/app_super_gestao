@@ -14,8 +14,8 @@ class SiteContatoSeeder extends Seeder
      */
     public function run()
     {
+        /* não é necessario com a factory em uso!
         //fillable('nome','telefone','email','motivo_contato','mensagem)
-
         //instanciando o Objeto
         $contato = new SiteContato();
         $contato->nome           = 'jose';
@@ -43,5 +43,12 @@ class SiteContatoSeeder extends Seeder
             'motivo_contato'=> 1,
             'mensagem'      => 'quero terminar o curso'
         ]);
+        */
+
+        //utilizando a factory
+        
+       // \App\Models\SiteContato::factory(100)->create();
+
+
     }
 }
