@@ -14,21 +14,18 @@ class AutenticacaoMiddleware
      * @param  \Closure(\Illuminate\Http\Request): (\Illuminate\Http\Response|\Illuminate\Http\RedirectResponse)  $next
      * @return \Illuminate\Http\Response|\Illuminate\Http\RedirectResponse
      */
-    public function handle(Request $request, Closure $next,$metodo_autenticacao,$perfil)
+    public function handle(Request $request, Closure $next)
     {
-        //return $next($request);
-        //verificar se o usuario possui acesso a rota
-        if($metodo_autenticacao == 'padrao'){
-            echo 'verificar o usuario e senha no banco de dados <br>';
-        } else {
-            echo 'Verificar o usuário e senha no AD <br>';
-        }
 
+        session_start();
+        if(isset($_SESSION['email']) && $_SESSION['email'] != ''){
 
-        if(false){
             return $next($request);
+
         } else {
-            return Response('Acesso negado! Rota exige autenticação!!!');
+
+            return redirect()->route('site.login',['erro' => 2]);
+
         }
     }
 }

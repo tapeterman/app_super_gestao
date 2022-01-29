@@ -1,6 +1,6 @@
 @extends('site.layouts.layout')
 
-@section('titulo','Contato')
+@section('titulo',$titulo)
 
 @section('conteudo')
     <div class="conteudo-pagina">

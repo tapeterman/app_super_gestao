@@ -7,8 +7,8 @@ use Illuminate\Http\Request;
 class SobreNosController extends Controller
 {
 
-    public function principal(){
-        return view('site.sobre-nos');
+    public function index(){
+        return view('site.sobre-nos',['titulo' =>'Sobre-Nos']);
     }
 }
 
