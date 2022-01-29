@@ -18,5 +18,6 @@ class DatabaseSeeder extends Seeder
         //novo metodo sem necessidade do seeder(utiliza a factory)
         \App\Models\SiteContato::factory(100)->create(); 
         \App\Models\Fornecedor::factory(100)->create();
+        $this->call(MotivoContatoSeeder::class);
     }
 }

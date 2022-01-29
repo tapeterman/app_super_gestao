@@ -3,36 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\SiteContato;
+use App\Models\{SiteContato,MotivoContato};
 
 class ContatoController extends Controller
 {
     public function principal(Request $request){
-        
-        /*metodo
-        $contato = new SiteContato();
-        $contato->nome = $request->input('nome');
-        $contato->telefone = $request->input('telefone');
-        $contato->email = $request->input('email');
-        $contato->motivo_contato = $request->input('motivo_contato');
-        $contato->mensagem = $request->input('mensagem');
-        $contato->save();
-        
-        //metodo fill
-        $contato = new SiteContato();
-        $contato->fill($request->all());
-        $contato->save();
-        
-        metodo create
-        $contato = new SiteContato();
-        $contato->create($request->all());
 
-        print_r($request->All());*/
-        $motivo_contatos = [
-            '1' => 'Dúvida',
-            '2' => 'Elogio',
-            '3' => 'Reclamação',
-        ];
+        $motivo_contatos = MotivoContato::All();
+        
         return view('site.contato',['titulo' => 'Contato (teste)','motivo_contatos' =>$motivo_contatos]);
     }
 
@@ -41,18 +19,25 @@ class ContatoController extends Controller
         //realizar validação dos dados enviados via request
         
         $request->validate([
-            'nome'              => 'required|min:3|max:40',
+            'nome'              => 'required|min:3|max:40|unique:site_contatos',
             'telefone'          => 'required',
-            'email'             => 'required',
-            'motivo_contato'    => 'required',
+            'email'             => 'email',
+            'motivo_contatos_id'=> 'required',
             'mensagem'          => 'required|max:2000',
+
+        ],[
+            'nome.min' => 'O campo nome precisa ter minimo 3 caracteres e no maximo 40 caracteres',
+            'nome.max' => 'O campo nome precisa ter minimo 3 caracteres e no maximo 40 caracteres',
+            'nome.unique' => 'Este nome já esta em uso',
+            'email.email' => 'Precisa ser um e-mail valido',
+            'mensagem.max' => 'Necessario preencher o campo com no maximo 2000 caracteres',
+            'required' => 'O campo :attribute precisa ser preenchido',
 
         ]);
 
-        //SiteContato::create($request->all());
-       
-
-        return view('site.contato',['titulo' => 'Contato (teste)']);
+        SiteContato::create($request->all());   
+    
+        return redirect()->route('site.index');
     }
 }
 

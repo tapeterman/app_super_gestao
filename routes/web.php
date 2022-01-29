@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\{PrincipalController,SobreNosController,ContatoController,TesteController,FornecedorController};
+use App\Http\Middleware\LogAcessoMiddleware;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,19 +15,23 @@ use App\Http\Controllers\{PrincipalController,SobreNosController,ContatoControll
 |
 */
 
-Route::get('/', [PrincipalController::class, 'principal'])->name('site.index');
+Route::middleware(LogAcessoMiddleware::class)
+    ->get('/', [PrincipalController::class, 'principal'])
+    ->name('site.index');
+
 Route::get('/sobre-nos', [SobreNosController::class , 'principal'])->name('site.sobrenos');
 Route::get('/contato', [ContatoController::class,'principal'])->name('site.contato');
-Route::post('/contato', [ContatoController::class,'salvar'])->name('site.contato');
 Route::get('/login', function(){return "Login";})->name('site.login');
-//agrupamento de rotas
+
 Route::prefix('/app')->group(function(){
     Route::get('/clientes', function(){return "clientes";})->name('app.clientes');
     Route::get('/fornecedores', [FornecedorController::class, 'index'])->name('app.fornecedores');
     Route::get('/produtos', function(){return "produtos";})->name('app.produtos');
 });
 
-Route::get('/teste/{p1}/{p2}', [TesteController::class,'teste'])->name('app.teste');
+Route::post('/', [PrincipalController::class, 'salvar'])->name('site.index');
+Route::post('/contato', [ContatoController::class,'salvar'])->name('site.contato');
+
 
 Route::fallback(function(){
     echo 'A rota acessada não existe,  para ir para pagina inicial <a href="'.route('site.index').'">clique aqui</a>';
