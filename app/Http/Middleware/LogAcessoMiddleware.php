@@ -21,7 +21,6 @@ class LogAcessoMiddleware
         $rota = $request->getRequestUri();
 
         LogAcesso::create(['ip' => $ip,'rota' =>$rota]);
-        return Response('chegamos no midd e finalizamos');
-        //return $next($request); 
+        return $next($request); 
     }
 }

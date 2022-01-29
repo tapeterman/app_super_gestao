@@ -15,8 +15,8 @@ class LogFactory extends Factory
     {
         //'nome','site','uf','email'
         return [
-            'ip'      => $this->faker->name,
-            'rota'    => $this->faker->name,
+            'ip'      => $this->faker->ipv4,
+            'rota'    => $this->faker->stateAbbr,
         ];
     }
 }

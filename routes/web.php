@@ -15,15 +15,20 @@ use App\Http\Middleware\LogAcessoMiddleware;
 |
 */
 
-Route::middleware(LogAcessoMiddleware::class)
-    ->get('/', [PrincipalController::class, 'principal'])
+Route::get('/', [PrincipalController::class, 'principal'])
     ->name('site.index');
 
-Route::get('/sobre-nos', [SobreNosController::class , 'principal'])->name('site.sobrenos');
-Route::get('/contato', [ContatoController::class,'principal'])->name('site.contato');
-Route::get('/login', function(){return "Login";})->name('site.login');
+Route::get('/sobre-nos', [SobreNosController::class , 'principal'])
+    ->name('site.sobrenos');
 
-Route::prefix('/app')->group(function(){
+Route::get('/contato', [ContatoController::class,'principal'])
+    ->name('site.contato');
+
+Route::get('/login', function(){return "Login";})
+    ->name('site.login');
+
+Route::middleware('autenticacao:padrao,visitante') 
+    ->prefix('/app')->group(function(){
     Route::get('/clientes', function(){return "clientes";})->name('app.clientes');
     Route::get('/fornecedores', [FornecedorController::class, 'index'])->name('app.fornecedores');
     Route::get('/produtos', function(){return "produtos";})->name('app.produtos');

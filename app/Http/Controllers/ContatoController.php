@@ -7,6 +7,7 @@ use App\Models\{SiteContato,MotivoContato};
 
 class ContatoController extends Controller
 {
+
     public function principal(Request $request){
 
         $motivo_contatos = MotivoContato::All();
