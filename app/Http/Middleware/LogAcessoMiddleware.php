@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use App\Models\LogAcesso;
 
 class LogAcessoMiddleware
 {
@@ -16,6 +17,11 @@ class LogAcessoMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        return $next($request);
+        $ip = $request->server->get('REMOTE_ADDR');
+        $rota = $request->getRequestUri();
+
+        LogAcesso::create(['ip' => $ip,'rota' =>$rota]);
+        return Response('chegamos no midd e finalizamos');
+        //return $next($request); 
     }
 }
