@@ -24,7 +24,7 @@
                     <input type="text" name="uf"    class="borda-preta" placeholder="uf">
                     <input type="text" name="email" class="borda-preta" placeholder="email">
                     <button type="submit" class="botda-preta">Pesquisar</button>
-
+                </form>
             </div>
         </div>  
     </div>

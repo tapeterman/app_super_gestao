@@ -40,7 +40,14 @@
                         @endforeach
                     </tbody>
                 <table>
+                {{ $fornecedores->appends($request)->links() }}
+                Exibindo 
+                    {{ $fornecedores->count() }} 
+                fornecedores de  
+                {{ $fornecedores->total() }} 
+                (de {{ $fornecedores->firstItem() }} a {{ $fornecedores->lastItem() }})  
             </div>
-        </div>  
+        </div> 
+         
     </div>
 @endsection

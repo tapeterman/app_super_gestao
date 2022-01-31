@@ -23,9 +23,9 @@ class FornecedorController extends Controller
                                   ->where('email','like',$email)
                                   ->where('uf','like',$uf)
                                   ->where('site','like',$site)
-                                  ->get();
+                                  ->paginate(10);
 
-        return view('app.fornecedor.listar',['titulo' =>'Fornecedor','fornecedores' => $fornecedores]);
+        return view('app.fornecedor.listar',['titulo' =>'Fornecedor','fornecedores' => $fornecedores,'request' => $request->all()]);
     }
 
     public function  adicionar(Request $request){
@@ -75,10 +75,8 @@ class FornecedorController extends Controller
                 $msg = 'Cadastro Realizado com Sucesso!';
 
             }
-
-            return view('app.fornecedor.adicionar',['titulo' =>'Fornecedor', 'msg' => $msg]);
-
         }
+        return view('app.fornecedor.adicionar',['titulo' =>'Fornecedor', 'msg' => $msg]);
         
     }
 
