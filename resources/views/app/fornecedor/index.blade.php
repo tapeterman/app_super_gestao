@@ -16,7 +16,7 @@
         </div>
         <div class="informacao-pagina">
         <div class="contato-principal" style="width: 30%;margin-left:auto;margin-right:auto;">
-               
+               {{ $msg ?? ''}}
                 <form method="post" action="{{ route('app.fornecedor.listar') }}">
                  @csrf
                     <input type="text" name="nome"  class="borda-preta" placeholder="nome">

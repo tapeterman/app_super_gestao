@@ -25,7 +25,7 @@ class FornecedorController extends Controller
                                   ->where('site','like',$site)
                                   ->paginate(10);
 
-        return view('app.fornecedor.listar',['titulo' =>'Fornecedor','fornecedores' => $fornecedores,'request' => $request->all()]);
+        return view('app.fornecedor.listar',['titulo' =>'Produtos','fornecedores' => $fornecedores,'request' => $request->all()]);
     }
 
     public function  adicionar(Request $request){
@@ -88,10 +88,13 @@ class FornecedorController extends Controller
 
     public function  excluir($id){
         
-        $fornecedor = Fornecedor::find($id);
-        dd($fornecedor);
-        echo 'excluir fornecedor';
-        //return view('app.fornecedor.index',['titulo' =>'Fornecedor']);
+        $fornecedor = Fornecedor::find($id)->delete();
+        if($fornecedor){
+            $msg = 'Fornecedor excluido com sucesso!';
+        }else{
+            $msg = 'Ops! algo deu errado ao deletar o fornecedor!';
+        }
+        return view('app.fornecedor.index',['titulo' =>'Fornecedor','msg' => $msg]);
     }
 
 }

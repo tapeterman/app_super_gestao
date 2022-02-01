@@ -15,6 +15,8 @@ use App\Http\Controllers\{HomeController,ClienteController,ProdutoController};
 |
 */
 
+Route::resource('produto',ProdutoController::class);
+
 Route::get('/', [PrincipalController::class, 'index'])->name('site.index');
 Route::post('/', [PrincipalController::class, 'salvar'])->name('site.index');
 
@@ -40,9 +42,6 @@ Route::middleware('autenticacao')
     Route::post('/fornecedor/adicionar',                [FornecedorController::class, 'adicionar']) ->name('app.fornecedor.adicionar');
     Route::get('/fornecedor/editar/{id}/{msg?}',        [FornecedorController::class, 'editar'])    ->name('app.fornecedor.editar');
     Route::get('/fornecedor/excluir/{id}',              [FornecedorController::class, 'excluir'])   ->name('app.fornecedor.excluir');
-
-    Route::get('/produto', [ProdutoController::class,'index'])->name('app.produto');
-
 
     Route::get('/sair', [LoginController::class,'sair'])->name('app.sair');
 });
