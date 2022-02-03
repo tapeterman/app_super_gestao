@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\{PrincipalController,SobreNosController,ContatoController,TesteController,FornecedorController,LoginController};
-use App\Http\Controllers\{HomeController,ClienteController,ProdutoController};
+use App\Http\Controllers\{HomeController,ClienteController,ProdutoController,ProdutoDetalheController};
 
 /*
 |--------------------------------------------------------------------------
@@ -15,7 +15,11 @@ use App\Http\Controllers\{HomeController,ClienteController,ProdutoController};
 |
 */
 
+//produtos
 Route::resource('produto',ProdutoController::class);
+//produtos detalhes
+Route::resource('produto-detalhe',ProdutoDetalheController::class);
+
 
 Route::get('/', [PrincipalController::class, 'index'])->name('site.index');
 Route::post('/', [PrincipalController::class, 'salvar'])->name('site.index');
