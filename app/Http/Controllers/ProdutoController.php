@@ -88,7 +88,8 @@ class ProdutoController extends Controller
     public function edit(Produto $produto)
     {
         $unidades = Unidade::find($produto);
-        return view('app.produto.edit',['titulo' =>'Editar Produto','produto' =>$produto,'classe' => 'borda-preta', 'unidades' =>$unidades]);
+        //return view('app.produto.edit',['titulo' =>'Editar Produto','produto' =>$produto,'classe' => 'borda-preta', 'unidades' =>$unidades]);
+        return view('app.produto.create',['titulo' =>'Editar Produto','produto' =>$produto,'classe' => 'borda-preta', 'unidades' =>$unidades]);
     }
 
     /**

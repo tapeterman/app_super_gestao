@@ -5,7 +5,11 @@
 @section('conteudo')
     <div class="conteudo-pagina">
         <div class="titulo-pagina-protegido">
-            <h1>Produto - Adicionar</h1>
+            @if(isset($produto->id))
+                <h1>Produto - Editar</h1>
+            @else
+                <h1>Produto - Adicionar</h1>
+            @endif
         </div>
         <br>  
         <div class="menu">
@@ -17,7 +21,13 @@
         <div class="informacao-pagina">
         {{ $msg ?? '' }}
         <div class="contato-principal" style="width: 30%;margin-left:auto;margin-right:auto;">
-                <form method="post" action="{{ route('produto.store') }}">
+                
+                @if(isset($produto->id))
+                     <form method="post" action="{{ route('produto.update',$produto) }}">
+                     @method('PUT')
+                @else
+                     <form method="post" action="{{ route('produto.store') }}">
+                @endif
                     @csrf
                     <input type="text" name="nome"  class="{{ $classe }}" value="{{ $produto->nome ?? old('nome') }}" placeholder="Nome do produto">
                     {{ ($errors->has('nome')) ? $errors->first('nome') : ''}}
@@ -31,11 +41,11 @@
                     <select name="unidade_id" class="{{ $classe }}">
                         <option value="">Selecione o tipo de unidade!</option>
                         @foreach ($unidades as $key => $unidade)
-                            <option value="{{ $unidade->id }}" {{ old('unidade_id') == $unidade->id ? 'selected' : ''}}>{{ $unidade->unidade.'-'.$unidade->descricao }}</option>
+                            <option value="{{ $unidade->id }}" {{ $unidade->id ??  old('unidade_id') == $unidade->id ? 'selected' : ''}}>{{ $unidade->unidade.'-'.$unidade->descricao }}</option>
                         @endforeach
                     </select>
                     {{ ($errors->has('unidade_id')) ? $errors->first('unidade_id') : ''}}
-                    <br>
+
                     <button type="submit" class="botda-preta">Atualizar Produto</button>
                 </form>
             </div>
