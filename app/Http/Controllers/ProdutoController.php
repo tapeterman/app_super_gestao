@@ -15,8 +15,12 @@ class ProdutoController extends Controller
     public function index(Request $request)
     {
 
+        //eager loader
+        $produtos = Produto::with('produtoDetalhe')->paginate(10);
+
+        //lazy loader
         $produtos = Produto::paginate(10);
-        
+
         /*
         foreach($produtos as $key => $produto){
             //buscar registros no banco na tabela produto detalhes de acordo com o id do produto
