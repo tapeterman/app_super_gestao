@@ -19,7 +19,7 @@ class FornecedorController extends Controller
         $uf     = '%'.$request->input('uf').'%';
         $site   = '%'.$request->input('site').'%';
 
-        $fornecedores = Fornecedor::where('nome','like',$nome)
+        $fornecedores = Fornecedor::with(['produtos'])->where('nome','like',$nome)
                                   ->where('email','like',$email)
                                   ->where('uf','like',$uf)
                                   ->where('site','like',$site)
