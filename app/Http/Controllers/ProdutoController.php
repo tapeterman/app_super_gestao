@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\{Produto,Unidade};
+use App\Models\{Produto,Unidade,ProdutoDetalhe};
 use Illuminate\Http\Request;
 
 class ProdutoController extends Controller
@@ -14,12 +14,20 @@ class ProdutoController extends Controller
      */
     public function index(Request $request)
     {
-        /*$nome   = '%'.$request->input('nome').'%';
-        $email  = '%'.$request->input('email').'%';
-        $uf     = '%'.$request->input('uf').'%';
-        $site   = '%'.$request->input('site').'%';*/
 
         $produtos = Produto::paginate(10);
+
+        foreach($produtos as $key => $produto){
+            //buscar registros no banco na tabela produto detalhes de acordo com o id do produto
+            $produtosDetalhe = ProdutoDetalhe::where('produto_id',$produto->id)->first();
+            if(isset($produtosDetalhe)){
+                //incluir no produto os detalhes recuperados
+                $produtos[$key]['comprimento'] = $produtosDetalhe->comprimento;
+                $produtos[$key]['largura'] = $produtosDetalhe->largura;
+                $produtos[$key]['altura'] = $produtosDetalhe->altura;
+            }
+        }
+
         return view('app.produto.index',['titulo' =>'Produtos','produtos' => $produtos,'request' => $request->all()]);
     }
 
