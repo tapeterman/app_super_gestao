@@ -16,7 +16,8 @@ class ProdutoController extends Controller
     {
 
         $produtos = Produto::paginate(10);
-
+        
+        /*
         foreach($produtos as $key => $produto){
             //buscar registros no banco na tabela produto detalhes de acordo com o id do produto
             $produtosDetalhe = ProdutoDetalhe::where('produto_id',$produto->id)->first();
@@ -26,7 +27,7 @@ class ProdutoController extends Controller
                 $produtos[$key]['largura'] = $produtosDetalhe->largura;
                 $produtos[$key]['altura'] = $produtosDetalhe->altura;
             }
-        }
+        }*/
 
         return view('app.produto.index',['titulo' =>'Produtos','produtos' => $produtos,'request' => $request->all()]);
     }
