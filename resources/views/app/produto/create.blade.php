@@ -21,7 +21,7 @@
         <div class="informacao-pagina">
         {{ $msg ?? '' }}
         <div class="contato-principal" style="width: 30%;margin-left:auto;margin-right:auto;">
-                @component('app.produto._components.form_create_edit',['produto' =>$produto,'classe' => $classe, 'unidades' =>$unidades])
+                @component('app.produto._components.form_create_edit',['produto' =>$produto,'classe' => $classe, 'unidades' =>$unidades,'fornecedores' => $fornecedores])
                 @endcomponent
             </div>
         </div>  

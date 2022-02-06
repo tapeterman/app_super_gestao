@@ -15,10 +15,6 @@ use App\Http\Controllers\{HomeController,ClienteController,ProdutoController,Pro
 |
 */
 
-//produtos
-Route::resource('produto',ProdutoController::class);
-//produtos detalhes
-Route::resource('produto-detalhe',ProdutoDetalheController::class);
 
 
 Route::get('/', [PrincipalController::class, 'index'])->name('site.index');
@@ -48,6 +44,12 @@ Route::middleware('autenticacao')
     Route::get('/fornecedor/excluir/{id}',              [FornecedorController::class, 'excluir'])   ->name('app.fornecedor.excluir');
 
     Route::get('/sair', [LoginController::class,'sair'])->name('app.sair');
+
+    Route::resource('produto',ProdutoController::class);
+    Route::resource('produto-detalhe',ProdutoDetalheController::class);
+    Route::resource('clientes',ClienteController::class);
+    Route::resource('pedido',PedidoController::class);
+    Route::resource('pedido',PedidoProdutoController::class);
 });
 
 

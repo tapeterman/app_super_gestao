@@ -10,6 +10,15 @@
 @endif
 
     @csrf
+
+    <select name="fornecedor_id" class="{{ $classe }}">
+        <option value="">-- Selecione o Fornecedor -- </option>
+        @foreach ($fornecedores as $key => $fornecedor)
+            <option value="{{ $fornecedor->id }}" {{ $fornecedor->id ??  old('fornecedor_id') == $fornecedor->id ? 'selected' : ''}}>{{ $fornecedor->nome }}</option>
+        @endforeach
+    </select>
+    {{ ($errors->has('fornecedor_id')) ? $errors->first('fornecedor_id') : ''}}
+
     <input type="text" name="nome"  class="{{ $classe }}" value="{{ $produto->nome ?? old('nome') }}" placeholder="Nome do produto">
     {{ ($errors->has('nome')) ? $errors->first('nome') : ''}}
 
