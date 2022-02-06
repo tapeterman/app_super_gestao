@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Cliente;
 
 class ClienteController extends Controller
 {
@@ -11,10 +12,11 @@ class ClienteController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         //
-        return view('app.cliente',['titulo' =>'Cliente']);
+        $clientes = Cliente::paginate(10);
+        return view('app.cliente.index',['titulo' =>'Clientes', 'clientes' =>$clientes,'request'=>$request->all()]);
         
     }
 
@@ -25,7 +27,12 @@ class ClienteController extends Controller
      */
     public function create()
     {
-        //
+
+        return view('app.cliente.create',[
+                    'titulo'        =>'Adicionar Cliente',
+                    'produto'       => '',
+                    'classe'        => 'borda-preta',
+                ]);
     }
 
     /**
@@ -36,7 +43,21 @@ class ClienteController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $regras =[
+            'nome'          => 'required|min:3|max:40',
+        ];
+        
+        $feedback = [
+            'nome.min'              => 'O campo :attribute deve ter no mínimo 3 caracteres',
+            'nome.max'              => 'O campo :attribute deve ter no máximo 2000 caracteres',
+            'required'              => 'O campo :attribute precisa ser preenchido'
+
+        ];
+
+        $request->validate($regras,$feedback);
+
+        Cliente::create($request->all());
+        return redirect()->route('cliente.index');
     }
 
     /**
@@ -45,9 +66,9 @@ class ClienteController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Cliente $cliente)
     {
-        //
+        return view('app.cliente.show',['titulo' =>'Detalhes do Cliente','cliente' =>$cliente]);
     }
 
     /**

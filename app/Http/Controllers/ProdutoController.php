@@ -18,9 +18,8 @@ class ProdutoController extends Controller
         //eager loader
         $produtos = Produto::with('produtoDetalhe','fornecedor')->paginate(10);
         
-
         //lazy loader
-        $produtos = Produto::paginate(10);
+        //$produtos = Produto::paginate(10);
 
         /*
         foreach($produtos as $key => $produto){

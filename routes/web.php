@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\{PrincipalController,SobreNosController,ContatoController,TesteController,FornecedorController,LoginController};
-use App\Http\Controllers\{HomeController,ClienteController,ProdutoController,ProdutoDetalheController};
+use App\Http\Controllers\{HomeController,ClienteController,ProdutoController,ProdutoDetalheController,PedidoController,PedidoProdutoController};
 
 /*
 |--------------------------------------------------------------------------
@@ -33,8 +33,6 @@ Route::middleware('autenticacao')
 
     Route::get('/home', [HomeController::class, 'index'])->name('app.home');
     
-    Route::get('/cliente', [ClienteController::class,'index'])->name('app.cliente');
-
     Route::get('/fornecedor',                           [FornecedorController::class, 'index'])     ->name('app.fornecedor');
     Route::post('/fornecedor/listar',                   [FornecedorController::class, 'listar'])    ->name('app.fornecedor.listar');
     Route::get('/fornecedor/listar',                    [FornecedorController::class, 'listar'])    ->name('app.fornecedor.listar');
@@ -47,9 +45,9 @@ Route::middleware('autenticacao')
 
     Route::resource('produto',ProdutoController::class);
     Route::resource('produto-detalhe',ProdutoDetalheController::class);
-    Route::resource('clientes',ClienteController::class);
+    Route::resource('cliente',ClienteController::class);
     Route::resource('pedido',PedidoController::class);
-    Route::resource('pedido',PedidoProdutoController::class);
+    Route::resource('pedido-produto',PedidoProdutoController::class);
 });
 
 
