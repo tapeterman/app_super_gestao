@@ -28,9 +28,9 @@
                             <tr>
                                 <td>{{ $cliente->nome }}</td>
                                 <td>
-                                    <a href="{{ route('produto.show',$cliente->id) }}">Detalhes</a>|
-                                    <a href="{{ route('produto.edit',$cliente) }}">Editar</a>|
-                                    <form id="form_{{ $cliente->id }}" method="post" action="{{ route('produto.destroy',$cliente->id) }}">
+                                    <a href="{{ route('cliente.show',$cliente->id) }}">Detalhes</a>|
+                                    <a href="{{ route('cliente.edit',$cliente) }}">Editar</a>|
+                                    <form id="form_{{ $cliente->id }}" method="post" action="{{ route('cliente.destroy',$cliente->id) }}">
                                         @method('DELETE')
                                         @csrf
                                         <a href="#" onclick="document.getElementById('form_{{ $cliente->id }}').submit()">Excluir</a>

@@ -30,7 +30,7 @@ class ClienteController extends Controller
 
         return view('app.cliente.create',[
                     'titulo'        =>'Adicionar Cliente',
-                    'produto'       => '',
+                    'cliente'       => '',
                     'classe'        => 'borda-preta',
                 ]);
     }
@@ -49,7 +49,7 @@ class ClienteController extends Controller
         
         $feedback = [
             'nome.min'              => 'O campo :attribute deve ter no mínimo 3 caracteres',
-            'nome.max'              => 'O campo :attribute deve ter no máximo 2000 caracteres',
+            'nome.max'              => 'O campo :attribute deve ter no máximo 40 caracteres',
             'required'              => 'O campo :attribute precisa ser preenchido'
 
         ];
@@ -77,9 +77,10 @@ class ClienteController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Cliente $cliente)
     {
-        //
+
+        return view('app.produto.create',['titulo' =>'Editar Cliente','cliente' =>$cliente,'classe' => 'borda-preta']);
     }
 
     /**
@@ -91,7 +92,21 @@ class ClienteController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $regras =[
+            'nome'          => 'required|min:3|max:40',
+        ];
+        
+        $feedback = [
+            'nome.min'              => 'O campo :attribute deve ter no mínimo 3 caracteres',
+            'nome.max'              => 'O campo :attribute deve ter no máximo 40 caracteres',
+            'required'              => 'O campo :attribute precisa ser preenchido'
+
+        ];
+
+        $request->validate($regras,$feedback);
+
+        Cliente::update($request->all());
+        return redirect()->route('cliente.index');
     }
 
     /**
@@ -100,8 +115,9 @@ class ClienteController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Cliente $cliente)
     {
-        //
+        $cliente->delete();
+        return redirect()->route('cliente.index');
     }
 }
