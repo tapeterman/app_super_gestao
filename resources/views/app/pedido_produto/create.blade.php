@@ -28,6 +28,33 @@
                 @component('app.pedido_produto._components.form_create',['classe' => $classe, 'produtos' =>$produtos,'pedido' =>$pedido])
                 @endcomponent
             </div>
+            <h4>Itens do Pedido</h4>
+            <table border="1"  style="width: 30%;margin-left:auto;margin-right:auto;">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nome do Produto</th>
+                        <th>Data de inclusão do Item</th>
+                        <th>Retirar do produto</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($pedido->produtos as $key => $pedidoProdutos)
+                        <tr>
+                            <td>{{ $pedidoProdutos->id }}</td>
+                            <td>{{ $pedidoProdutos->nome }}</td>
+                            <td>{{ $pedidoProdutos->created_at }}</td>
+                            <td>
+                                <form id="form_{{ $pedidoProdutos->pivot->id }}" method="post" action="{{ route('pedido-produto.destroy',$pedidoProdutos->pivot->id ) }}">
+                                    @method('DELETE')
+                                    @csrf
+                                    <a href="#" onclick="document.getElementById('form_{{ $pedidoProdutos->pivot->id }}').submit()">Excluir</a>
+                                </form>
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            <table>
         </div>  
     </div>
 @endsection

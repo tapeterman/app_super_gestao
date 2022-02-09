@@ -20,7 +20,7 @@
         </div>
         <div class="informacao-pagina">
         {{ $msg ?? '' }}
-        <div class="contato-principal" style="width: 30%;margin-left:auto;margin-right:auto;">
+            <div class="contato-principal" style="width: 30%;margin-left:auto;margin-right:auto;">
                 @component('app.cliente._components.form_create_edit',['cliente' =>$cliente,'classe' => $classe])
                 @endcomponent
             </div>

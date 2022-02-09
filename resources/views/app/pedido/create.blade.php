@@ -20,7 +20,7 @@
         </div>
         <div class="informacao-pagina">
         {{ $msg ?? '' }}
-        <div class="contato-principal" style="width: 30%;margin-left:auto;margin-right:auto;">
+            <div class="contato-principal" style="width: 30%;margin-left:auto;margin-right:auto;">
                 @component('app.pedido._components.form_create_edit',['clientes' =>$clientes,'classe' => $classe])
                 @endcomponent
             </div>
