@@ -18,7 +18,7 @@ class Pedido extends Model
             4 param - nome da fk mapeada pelo model (produto)
 
         */
-        return $this->belongsToMany(Produto::class,'pedidos_produtos')->withPivot('created_at','id');
+        return $this->belongsToMany(Produto::class,'pedidos_produtos')->withPivot('created_at','id','quantidade');
     }
 
 }
